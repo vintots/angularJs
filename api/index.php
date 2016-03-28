@@ -1,7 +1,8 @@
 <?php
-	$conn = mysqli_connect("localhost","root","root","angular_api") or die(mysqli_error($conn));
+	include"conn.php";
 
 	//////list of users
+	if($_GET['list']==1){
 	$q=mysqli_query($conn,"select *from Users") or die(mysqli_error($conn));
 
 	$result=array();
@@ -16,5 +17,11 @@
 	}
 	$response = array("users" => $result);
 	echo json_encode($response);
+	}elseif($_GET['validation']==1){
+		include"checker.php";
+	}
+	
+
+	
 	//end
 ?>

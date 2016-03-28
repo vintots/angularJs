@@ -4,14 +4,14 @@
 //   })
 // })
 angular.module('myApp.getUsersService', [])
-.factory('getUsers', function($q,ApiservicesUsers){
+.factory('getUsers', function($q,ApiservicesUsers,validateUserLogin){
 
 	function fetch_data(){
     // console.log('hurra');
 
           var deferred = $q.defer();
 
-          var leaderboard = ApiservicesUsers.getResource('',deferred).get({},{},function(response){
+          var leaderboard = ApiservicesUsers.getResource('list=1',deferred).get({},{},function(response){
               // 
               if(leaderboard.users.length > 0){
                  deferred.resolve(leaderboard);
@@ -27,6 +27,23 @@ angular.module('myApp.getUsersService', [])
           return deferred.promise;
     }
 
+    function UserValidationApi(User){
+      // console.log(User);
+       ///use promise
+       var deferred = $q.defer(); 
+       var verify=validateUserLogin.getResource('validation=1&username='+User.username+'&password='+User.password,deferred).get({},{},function(response){
+        if(verify.Validation.authorize){
+          deferred.resolve(verify.Validation);
+        }else{
+          deferred.reject("Invalid");
+        }
+       },function(fail){
+         deferred.reject('api error');
+       });
+       // var getData =
+       return deferred.promise;
+    }
+
 
     return {
         sayHello: function($scope){
@@ -38,6 +55,10 @@ angular.module('myApp.getUsersService', [])
         all: function(){
 
         	return fetch_data();
+        },
+
+        validateUser : function(User){
+          return UserValidationApi(User);
         }
 
     }              

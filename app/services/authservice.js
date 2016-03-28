@@ -29,6 +29,19 @@ angular.module('myApp.authService', [])
             return deferred.promise;
 
         },
+        loginValidation: function(User){
+             var deferred = $q.defer();
+
+             getUsers.validateUser(User).then(function(success){
+                // console.log(success);
+                deferred.resolve(success);
+             },function(fail){
+                // console.log(fail);
+                deferred.reject(fail);
+             });
+            return deferred.promise;
+        },
+        
         sayGoodbye: function($scope){
             return "Factory says";
         }  

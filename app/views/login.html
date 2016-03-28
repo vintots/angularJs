@@ -1,28 +1,28 @@
 <div class="col-sm-8 col-sm-push-4">
-    
+   
 </div>
 <div class="col-sm-4 col-sm-pull-8" ng-controller="MainController">
-    <form name="loginForm">
+    <form name="loginForm" ng-submit="login(myForm.$loginForm)">
         <div class="form-group">
             <label for="username">Username</label>
             <input ng-model="user.username" type="text" id="username" name="username" class="form-control" placeholder="Enter username" autofocus="true" autocomplete="off" ng-required="true">
-            <span ng-show="!user.username.length">Please enter Username!</span>
+    
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input ng-model="user.password" type="password" id="password" name="password" class="form-control" placeholder="Enter password" ng-required="true">
-            <span ng-show="!user.password.length">Please enter Password!</span>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary" ng-click="loginForm.$valid && login()">Log In</button>
+            <button class="btn btn-primary">Log In</button>
         </div>
+        <div ng-show="Invalid" class='alert alert-danger'>Incorrect Username or Password</div>
     </form>
     
-              {{user}}
+              <!-- {{user}} -->
               <br/>
-    <div ng-repeat="item in user">
+   <!--  <div ng-repeat="item in user">
             {{item.username}}-{{item.password}}
-    </div>
+    </div> -->
       
 </div>
 

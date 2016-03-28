@@ -1,7 +1,10 @@
 angular.module('myApp.loginController', [])
-.controller('MainController',function($state,$scope){
+.controller('MainController',function($state,$scope,$rootScope,Authenticate,isLoggedIn){
+var User ={ };
+isLoggedIn.logRedir();
+//initialize
+isLoggedIn.initSess();
 
-  
   
   // $scope.user=  [ 
   //                 {
@@ -22,10 +25,23 @@ angular.module('myApp.loginController', [])
   //   // console.log('toActivationKey');
   //   $state.go('app.activation');
   // }
-  $scope.login=function($scope){
+  $scope.login=function(){
   	// console.log($scope.user.username);
   	// console.log($scope.user.password);
-  	$state.go('homepage');
+    User ={
+                'username' :$scope.user.username,
+                'password' : $scope.user.password
+    }
+    // console.log(User);
+      Authenticate.loginValidation(User).then(function(success){ 
+      
+      isLoggedIn.saveSession(User);
+     $state.go('homepage');
+    },function(fail){
+      $scope.Invalid=true;
+    })
+    
+  	// $state.go('homepage');
   }
 
    

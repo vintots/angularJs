@@ -15,5 +15,7 @@ var myApp = angular.module('myApp', [
   'myApp.authService',
   'myApp.getUsersService',
   'myApp.apiservices',
-  'myApp.apiRequest'
+  'myApp.apiRequest',
+  'myApp.isLogged',
+  'myApp.User'
 ]);

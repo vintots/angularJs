@@ -22,23 +22,26 @@ angular.module('myApp.apiRequest',[])
 .factory('apiRequest',function($q,$resource,$timeout){
 
   function _getResource(url,callback_promise){
+    // console.log(url);
     // $timeout(function() {
     //     console.log('aborting..');
     //     callback_promise.resolve('timeout');
     // }, 10000);
 
     return $resource(
-        eleksyon_server + url , {},
+        eleksyon_server+'?' + url , {},
         {
           save: {
             method:'POST',
             isArray: false,
-            timeout: callback_promise.promise
+            timeout: 5000
+            // timeout: callback_promise.promise
           },
           get: {
             method:'GET',
             isArray: false,
-            timeout: callback_promise.promise
+            timeout: 5000
+            // timeout: callback_promise.promise
           }
         }
     );

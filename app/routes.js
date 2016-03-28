@@ -12,7 +12,13 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url:'/main_view',
       templateUrl: "views/main_view.html",
       controller: "hompageController"
+    })
+      $stateProvider
+     .state('AddUser',{
+      url:'/AddUser',
+      templateUrl: "views/addUser",
+      controller: "User"
     });
-
+     
 
 });
